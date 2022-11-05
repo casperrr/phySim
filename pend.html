@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendulumn</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Poppins:wght@100;200;500&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="Vector.js"></script>
+    
+</head>
+<body>
+    <!-- header -->
+    <header>
+        <nav>
+            <div ><a href="/index.html" id="logo">Phy<span>sim</span></a></div>
+            <ul class="nav__menu">
+                <li class="nav__items">
+                    <a href="/index.html" class="nav__links">Home</a>
+                </li>
+                <li class="nav__items">
+                    <a href="/simulations.html" class="nav__links">Simulations</a>
+                </li>
+                <li class="nav__items">
+                    <a href="/pend.html" class="nav__links">Temp Pendulumn</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <section class="main__container">
+        <canvas width="1200" height="800"></canvas>
+        <div class="slider__contaner">
+            <ul>
+                <li class="element__container">
+                    <div class="element">
+                        <h2 class="element__label">
+                            Length
+                        </h2>
+                        <p class="element__text">
+                            Adjust slider to change the length of the arm.
+                        </p>
+                        <div class="slider__value__container">
+                            <input type="range" min="1" max="700" value="400" class="slider" id="length">
+                            <h3 class="slider__value" id="len__val">120</h3>       
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+        </div>
+    </section>
+    <script src="canvas.js"></script>
+</body>
+</html>
