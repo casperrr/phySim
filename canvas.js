@@ -4,7 +4,7 @@ const c = canvas.getContext('2d');
 
 const lenSlid = document.getElementById("length");
 const lenOut = document.getElementById("len__val");
-lenOut.innerHTML = lenSlid.value;
+lenOut.innerHTML = "Length = "+lenSlid.value;
 
 const width = canvas.width;
 const height = canvas.height;
@@ -16,7 +16,7 @@ function setup(){
 }
 
 lenSlid.oninput = function(){
-    lenOut.innerHTML = this.value;
+    lenOut.innerHTML = "Length = "+this.value;
 }
 
 //animation loop
