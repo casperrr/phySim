@@ -32,7 +32,7 @@ nav{
 }
 
 /* just to change the thing to pink */
-span {
+#logo span {
     color: hotpink;
 }
 
@@ -212,13 +212,18 @@ canvas {
   }
 
   .element__container{
-    list-style: none;
+    display: flex;
+    gap: 20px;
     margin: 20px;
+    flex-wrap: wrap;
   }
 
   .element{
     background: #272727;
     border-radius: 20px;
+    width: 100%;
+    min-width: 300px;
+    max-width: 1000px;
     box-shadow: 1px 0px 10px 4px rgb(0,0,0,0.3);
     color: rgba(255, 255, 255, 0.842);
     display: flex;
@@ -233,12 +238,10 @@ canvas {
 }
 
 .element h2{
-    display: flex;
     font-weight: 400;
 }
 
 .element p{
-    display: flex;
     font-weight: 300;
     color: #ffffffb9;
 }
@@ -254,6 +257,7 @@ canvas {
     font-weight:400;
 
 }
+
 
 .slider__value{
     padding: 5px;

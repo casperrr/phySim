@@ -24,9 +24,6 @@
                 <li class="nav__items">
                     <a href="/simulations.html" class="nav__links">Simulations</a>
                 </li>
-                <li class="nav__items">
-                    <a href="/pend.html" class="nav__links">Temp Pendulumn</a>
-                </li>
             </ul>
         </nav>
     </header>
@@ -35,27 +32,71 @@
     <section class="main__container">
         <canvas width="1200" height="800"></canvas>
         <div class="slider__contaner">
-            <ul>
-                <li class="element__container">
-                    <div class="element">
-                        <h2>
-                            Length
-                        </h2>
-                        <p>
-                            Adjust slider to change the length of the arm.
-                        </p>
+
+                <div class="element__container">
+                    <div class="element len">
+                        <h2>Length</h2>
+                        <p>Adjust slider to change the length of the arm.</p>
                         <div class="slider__value__container">
-                            <h3>0</h3>
+                            <h3>1</h3>
                             <input type="range" min="1" max="700" value="400" class="slider" id="length">
                             <h3>700</h3>
                         </div>
-                        <h3 class="slider__value" id="len__val">120</h3>       
+                        <!-- <h3 class="slider__value" id="len__val">120</h3>        -->
+                        <h3 class="slider__value">Length = <span id="len__val">400</span></h3>       
                     </div>
-                </li>
-            </ul>
+                    <div class="element mass">
+                        <h2>Mass</h2>
+                        <p>Adjust slider to change the mass of the bob.</p>
+                        <div class="slider__value__container">
+                            <h3>0</h3>
+                            <input type="range" min="0" max="150" value="15" class="slider" id="mass">
+                            <h3>150</h3>
+                        </div>
+                        <h3 class="slider__value">Mass = <span id="mass__val"></span></h3>       
+                    </div>
+                    <div class="element grav">
+                        <h2>Gravity</h2>
+                        <p>Adjust slider to change the gravity. Deafault value is equivilent to earths gravity.</p>
+                        <div class="slider__value__container">
+                            <h3>0</h3>
+                            <input type="range" min="0" max="200" value="98" class="slider" id="gravity">
+                            <h3>20</h3>
+                        </div>
+                        <h3 class="slider__value">Gravity = <span id="grav__val"></span></h3>       
+                    </div>
+                    <div class="element size">
+                        <h2>Size</h2>
+                        <p>Adjust slider to change the size of the bob. This is only a visual change, there will be no change in simulation.</p>
+                        <div class="slider__value__container">
+                            <h3>0</h3>
+                            <input type="range" min="0" max="200" value="50" class="slider" id="size">
+                            <h3>200</h3>
+                        </div>
+                        <h3 class="slider__value">Size = <span id="size__val"></span></h3>       
+                    </div>
+                    <div class="element damp">
+                        <h2>Dampening</h2>
+                        <p>Adjust the slider to change the amount of dampening, this is equivilent to some sort of energy loss like friction.</p>
+                        <div class="slider__value__container">
+                            <h3>0</h3>
+                            <input type="range" min="0" max="100" value="0" class="slider" id="damp">
+                            <h3>1</h3>
+                        </div>
+                        <h3 class="slider__value">Damp = <span id="damp__val"></span></h3>       
+                    </div>
+                    <div class="element vectors">
+                        <h2>Vectors</h2>
+                        <p>Chose which vecotrs you want to show.</p>
+                        <div class="slider__value__container">
+                            
+                        </div>
+                    </div>
+                </div>
+
             
         </div>
     </section>
-    <script src="canvas.js"></script>
+    <script src="pend.js"></script>
 </body>
 </html>
