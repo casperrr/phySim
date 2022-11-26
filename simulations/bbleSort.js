@@ -15,7 +15,7 @@ class Bar{
 
 function init(){
     for(var i = 0; i < barNum; i++){
-        bars.push(new Bar(i,"test"));
+        bars.push(new Bar(i+1,"test"));
     }
 }
 
