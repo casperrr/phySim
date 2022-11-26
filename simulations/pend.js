@@ -57,18 +57,11 @@ captureMouse = function(element){
         mouse.x = event.pageX;
         mouse.y = event.pageY;
         mouse.event = event;
-        
-        
-        // var mousePos = new Vector(e.pageX,e.pageY);
-        // var mouseAng = Math.atan2(origin.y - mousePos.y,origin.x - mousePos.x);
-        // console.log(mouseAng);
-        // http://www.java2s.com/ref/javascript/html-canvas-mouse-press-drag-and-throw-circle.html
     },false);
 }
 
 canvas.addEventListener("mousedown", function(){
     mouseDown = true;
-
     canvas.addEventListener("mouseup", onMouseUp, false);
     canvas.addEventListener("mousemove", onMouseMove, false); 
 },false);
@@ -82,7 +75,7 @@ function onMouseUp(){
 function onMouseMove(event){
     var mousePos = new Vector(event.pageX,event.pageY);
     var mouseAng = Math.atan2(origin.y - mousePos.y,origin.x - mousePos.x);
-    console.log(mouseAng);
+    //console.log(mouseAng);
     pen.moveToMouse(-mouseAng - Math.PI/2);
 }
 
