@@ -45,6 +45,11 @@ function drawBar(x,y,width,height,color){
     c.fill();
 }
 
+function shuffle(arr){
+    arr.sort(() => Math.random() - 0.5);
+}
+
 
 init();
+shuffle(bars);
 loop();
