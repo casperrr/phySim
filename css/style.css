@@ -162,7 +162,7 @@ nav{
 .main__container {
     background-color: #181818;
     display: flex;
-    flex-wrap: wrap;
+    
 }
 
 canvas {
