@@ -141,6 +141,10 @@ async function bubbleSort(arr){
     }
 }
 
+function mergeSort(arr){
+    
+}
+
 
 init();
 //shuffle(bars);
