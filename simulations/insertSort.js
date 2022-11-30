@@ -133,7 +133,7 @@ async function insertSort(arr){
         //draw here
         bg();
         drawBars(bars);
-        await sleep(100);
+        await sleep(1000-speed);
     }
 }
 
