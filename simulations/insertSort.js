@@ -148,12 +148,9 @@ function insertSort(arr){
         while(j >= 0 && arr[j].height > key.height){
             arr[j+1] = arr[j];
             j--;
-            // j -= 1;
-            // console.log("running")
         }
         arr[j+1] = key;
     }
-    //return arr;
 }
 
 
