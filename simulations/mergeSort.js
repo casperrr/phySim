@@ -129,28 +129,6 @@ function sleep2(milliseconds) {
     while (Date.now() - start < milliseconds);
   }
 
-async function bubbleSort(arr){
-    for (var j = 0; j < arr.length - 1; j++){
-        for(var i = 0; i < arr.length - j - 1; i++){
-            if(abortController){
-                if (arr[i].height > arr[i + 1].height){
-                    [arr[i],arr[i+1]] = [arr[i+1],arr[i]];
-                }
-                //console.log(arr);
-                //update frame here
-                await sleep(1000-speed);
-                bg();
-                drawBars(bars);
-                //requestAnimationFrame();
-            }else{
-                return;
-            }
-        }
-    }
-}
-
-
-
 
 async function mergeSort(arr,start){
     let len = arr.length;
@@ -193,14 +171,11 @@ async function merge(left,right,start){
         //draw each fram to screen
         bg();
         drawBars(displayBars);
-        await sleep(1);
+        await sleep(1000-speed);
     }
     return sortedArr;
 }
 
 
 init();
-//shuffle(bars);
 drawBars(bars);
-//bubbleSort(bars);
-//loop();
