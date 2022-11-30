@@ -41,7 +41,7 @@ document.querySelector(".element__btn__container").addEventListener("click",func
         switch(btnClicked.id){
             case "btnStart":
                 abortController = true;
-                bubbleSort(bars);
+                insertSort(bars);
                 break;
             case "btnShuffle":
                 abortController = false;
@@ -67,6 +67,12 @@ class Bar{
         this.color = color;
     }
 }
+
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 
 function init(){
     bars = [];
@@ -141,7 +147,7 @@ async function bubbleSort(arr){
     }
 }
 
-function insertSort(arr){
+async function insertSort(arr){
     for (let i = 1; i < arr.length; i++){
         let key = arr[i];
         let j = i - 1;
@@ -150,6 +156,10 @@ function insertSort(arr){
             j--;
         }
         arr[j+1] = key;
+        //draw here
+        bg();
+        drawBars(bars);
+        await sleep(100);
     }
 }
 
