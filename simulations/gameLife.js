@@ -2,6 +2,8 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext("2d");
 const inputs = document.querySelector(".element__container");
 
+var gridSize = 10;
+var cellArr;
 
 //Event listner for inputs (Range slider only.)
 inputs.addEventListener("input", function(e){
@@ -42,7 +44,7 @@ document.querySelector(".element__btn__container").addEventListener("click",func
     e.stopPropagation();
 },false)
 
-var gridSize = 10;
+
 //REMEBER TO USE STROKE AS PADDING.
 
 
@@ -53,7 +55,12 @@ function sleep(ms) {
 
 
 function init(){
-    
+    cellArr = makeArray(gridSize,gridSize);
+    for(let i = 0; i < gridSize; i++){
+        for(let j = 0; j < gridSize; j++){
+            cellArr[i][j] = Math.floor(Math.random()*2);
+        }
+    }
 }
 
 function bg(){
