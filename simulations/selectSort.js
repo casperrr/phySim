@@ -3,7 +3,7 @@ const c = canvas.getContext("2d");
 const inputs = document.querySelector(".element__container");
 
 var abortController = true;
-var barNum = 80;
+var barNum = 10;
 var barNumInp = 80;
 var leftGap = 10;
 var speed = 200;
@@ -139,6 +139,24 @@ async function insertSort(arr){
         drawBars(bars);
         await sleep(1000-speed);
     }
+}
+
+function selectionSort(arr){
+    for(let i = 0; i<arr.length; i++){
+      //find min number in subarray 
+      //and place it at ith position
+        let minptr = i;
+        for(let j = i+1; j<arr.length; j++){
+            if(arr[minptr].height > arr[j].height){
+                minptr = j;
+            }
+        }
+      //swap
+        let temp = arr[i];
+        arr[i] = arr[minptr];
+        arr[minptr] = temp;
+    }
+    //return arr;
 }
 
 
