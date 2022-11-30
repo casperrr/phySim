@@ -79,9 +79,12 @@ function drawGrid(arr){
 
 function drawCell(x,y,w,h){
     c.fillStyle = "rgb(255,10,100)";
+    c.strokeStyle = "#181818";
+    c.lineWidth = 4;
     c.beginPath();
-    c.roundRect(x,y,w,h,5);
+    c.roundRect(x,y,w,h,10);
     c.fill();
+    c.stroke();
 }
 
 function makeArray(cols, rows){
