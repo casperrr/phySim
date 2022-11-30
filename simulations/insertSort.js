@@ -3,7 +3,7 @@ const c = canvas.getContext("2d");
 const inputs = document.querySelector(".element__container");
 
 var abortController = true;
-var barNum = 80;
+var barNum = 10;
 var leftGap = 10;
 var speed = 200;
 var dist = canvas.width/barNum;
@@ -139,6 +139,21 @@ async function bubbleSort(arr){
             }
         }
     }
+}
+
+function insertSort(arr){
+    for (let i = 1; i < arr.length; i++){
+        let key = arr[i];
+        let j = i - 1;
+        while(j >= 0 && arr[j].height > key.height){
+            arr[j+1] = arr[j];
+            j--;
+            // j -= 1;
+            // console.log("running")
+        }
+        arr[j+1] = key;
+    }
+    //return arr;
 }
 
 
