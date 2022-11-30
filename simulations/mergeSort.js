@@ -157,32 +157,19 @@ async function mergeSort(arr,start){
     if (len <= 1) return arr;
 
     let mid = Math.floor(len / 2);
-    //console.log(arr);
-
     let left = await mergeSort(arr.slice(0,mid),start);
     let right = await mergeSort(arr.slice(mid),mid+start);
-    console.log(start);
-    
     return merge(left,right,start);
-    
-    
 }
 
 
 async function merge(left,right,start){
     let sortedArr = [];
-    
-    console.log([left,right])
-    
-    
-    // bg();
-    // drawBars(sortedArr);
     let index = 0;
     let len = (left.length+right.length)
     let l = 0;
     let r = 0;
     for(var i = 0; i < len;i++){
-        //console.log([index,l,r])
         if (l >= left.length){
             displayBars[start+index] = right[r];
             sortedArr[index] = right[r];
@@ -192,34 +179,22 @@ async function merge(left,right,start){
             sortedArr[index] = left[l];
             l++
         }else{ 
-
             if (left[l].height < right[r].height){
                 displayBars[start+index] = left[l];
-                // sortedArr.push(left[l]);
                 sortedArr[index] = left[l];
                 l++;
             }else {
                 displayBars[start+index] = right[r];
-                // sortedArr.push(right[r]);
                 sortedArr[index] = right[r];
                 r++;
             }
         }
         index++;
-        
+        //draw each fram to screen
         bg();
-        //console.log(displayBars);
-        //console.log("index "+ index)
         drawBars(displayBars);
         await sleep(1);
     }
-
-    //console.log(displayBars);
-    //console.log(sortedArr);
-
-
-    //console.log([...sortedArr, ...left,...right])
-    //return [...sortedArr, ...left,...right];
     return sortedArr;
 }
 
