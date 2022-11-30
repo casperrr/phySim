@@ -126,8 +126,12 @@ async function insertSort(arr){
         let key = arr[i];
         let j = i - 1;
         while(j >= 0 && arr[j].height > key.height){
-            arr[j+1] = arr[j];
-            j--;
+            if (abortController){
+                arr[j+1] = arr[j];
+                j--;
+            }else{
+                return;
+            }
         }
         arr[j+1] = key;
         //draw here
