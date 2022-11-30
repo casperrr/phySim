@@ -3,7 +3,8 @@ const c = canvas.getContext("2d");
 const inputs = document.querySelector(".element__container");
 
 var abortController = true;
-var barNum = 10;
+var barNum = 80;
+var barNumInp = 80;
 var leftGap = 10;
 var speed = 200;
 var dist = canvas.width/barNum;
@@ -50,6 +51,7 @@ document.querySelector(".element__btn__container").addEventListener("click",func
                 drawBars(bars);
                 break;
             case "btnGen":
+                barNum = barNumInp;
                 abortController = false;
                 bars = [];
                 bg();
@@ -82,19 +84,11 @@ function init(){
     for(var i = 0; i < barNum; i++){
         bars.push(new Bar(i+1,colorLerp(colorA,colorB,i/barNum)));
     }
-    //shuffle(bars);
 }
 
 function bg(){
     c.fillStyle = '#181818';
     c.fillRect(0,0,canvas.width,canvas.height);
-}
-
-function loop(){
-    bg();
-    drawBars(bars);
-
-    requestAnimationFrame(loop);
 }
 
 function drawBars(arr){
@@ -127,26 +121,6 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function bubbleSort(arr){
-    for (var j = 0; j < arr.length - 1; j++){
-        for(var i = 0; i < arr.length - j - 1; i++){
-            if(abortController){
-                if (arr[i].height > arr[i + 1].height){
-                    [arr[i],arr[i+1]] = [arr[i+1],arr[i]];
-                }
-                //console.log(arr);
-                //update frame here
-                await sleep(1000-speed);
-                bg();
-                drawBars(bars);
-                //requestAnimationFrame();
-            }else{
-                return;
-            }
-        }
-    }
-}
-
 async function insertSort(arr){
     for (let i = 1; i < arr.length; i++){
         let key = arr[i];
@@ -165,7 +139,4 @@ async function insertSort(arr){
 
 
 init();
-//shuffle(bars);
 drawBars(bars);
-//bubbleSort(bars);
-//loop();
