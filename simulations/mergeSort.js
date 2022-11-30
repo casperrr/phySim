@@ -3,7 +3,7 @@ const c = canvas.getContext("2d");
 const inputs = document.querySelector(".element__container");
 
 var abortController = true;
-var barNum = 8;
+var barNum = 80;
 var leftGap = 10;
 var speed = 200;
 var dist = canvas.width/barNum;
@@ -148,30 +148,34 @@ async function merge(left,right,start){
     let l = 0;
     let r = 0;
     for(var i = 0; i < len;i++){
-        if (l >= left.length){
-            displayBars[start+index] = right[r];
-            sortedArr[index] = right[r];
-            r++
-        }else if(r >= right.length){
-            displayBars[start+index] = left[l];
-            sortedArr[index] = left[l];
-            l++
-        }else{ 
-            if (left[l].height < right[r].height){
-                displayBars[start+index] = left[l];
-                sortedArr[index] = left[l];
-                l++;
-            }else {
-                displayBars[start+index] = right[r];
-                sortedArr[index] = right[r];
-                r++;
+        if(abortController){
+                if (l >= left.length){
+                    displayBars[start+index] = right[r];
+                    sortedArr[index] = right[r];
+                    r++
+                }else if(r >= right.length){
+                    displayBars[start+index] = left[l];
+                    sortedArr[index] = left[l];
+                    l++
+                }else{ 
+                    if (left[l].height < right[r].height){
+                        displayBars[start+index] = left[l];
+                        sortedArr[index] = left[l];
+                    l++;
+                }else {
+                    displayBars[start+index] = right[r];
+                    sortedArr[index] = right[r];
+                    r++;
+                }
             }
+            index++;
+            //draw each fram to screen
+            bg();
+            drawBars(displayBars);
+            await sleep(1000-speed);
+        }else{
+            return;
         }
-        index++;
-        //draw each fram to screen
-        bg();
-        drawBars(displayBars);
-        await sleep(1000-speed);
     }
     return sortedArr;
 }

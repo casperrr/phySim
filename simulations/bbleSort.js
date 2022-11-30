@@ -3,7 +3,7 @@ const c = canvas.getContext("2d");
 const inputs = document.querySelector(".element__container");
 
 var abortController = true;
-var barNum = 10;
+var barNum = 80;
 var leftGap = 10;
 var speed = 200;
 var dist = canvas.width/barNum;
