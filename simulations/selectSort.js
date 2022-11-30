@@ -147,8 +147,12 @@ async function selectionSort(arr){
       //and place it at ith position
         let minptr = i;
         for(let j = i+1; j<arr.length; j++){
-            if(arr[minptr].height > arr[j].height){
-                minptr = j;
+            if(abortController){
+                if(arr[minptr].height > arr[j].height){
+                    minptr = j;
+                }
+            }else{
+                return;
             }
         }
       //swap
