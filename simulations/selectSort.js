@@ -141,7 +141,7 @@ async function insertSort(arr){
     }
 }
 
-function selectionSort(arr){
+async function selectionSort(arr){
     for(let i = 0; i<arr.length; i++){
       //find min number in subarray 
       //and place it at ith position
@@ -155,6 +155,10 @@ function selectionSort(arr){
         let temp = arr[i];
         arr[i] = arr[minptr];
         arr[minptr] = temp;
+        //draw
+        bg();
+        drawBars(bars);
+        await sleep(1000-speed)
     }
     //return arr;
 }
