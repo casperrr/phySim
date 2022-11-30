@@ -4,6 +4,7 @@ const inputs = document.querySelector(".element__container");
 
 var abortController = true;
 var barNum = 80;
+var barNumInp = 80;
 var leftGap = 10;
 var speed = 200;
 var dist = canvas.width/barNum;
@@ -53,6 +54,7 @@ document.querySelector(".element__btn__container").addEventListener("click",func
                 drawBars(bars);
                 break;
             case "btnGen":
+                barNum = barNumInp;
                 abortController = false;
                 bars = [];
                 bg();
