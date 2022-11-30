@@ -85,7 +85,7 @@ function init(){
 }
 
 function bg(){
-    c.fillStyle = '#181a1b';
+    c.fillStyle = '#181818';
     c.fillRect(0,0,canvas.width,canvas.height);
 }
 
