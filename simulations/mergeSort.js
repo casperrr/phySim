@@ -3,7 +3,7 @@ const c = canvas.getContext("2d");
 const inputs = document.querySelector(".element__container");
 
 var abortController = true;
-var barNum = 10;
+var barNum = 8;
 var leftGap = 10;
 var speed = 200;
 var dist = canvas.width/barNum;
@@ -41,7 +41,7 @@ document.querySelector(".element__btn__container").addEventListener("click",func
         switch(btnClicked.id){
             case "btnStart":
                 abortController = true;
-                bubbleSort(bars);
+                mergeSort(bars);
                 break;
             case "btnShuffle":
                 abortController = false;
@@ -121,6 +121,11 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function sleep2(milliseconds) {
+    const start = Date.now();
+    while (Date.now() - start < milliseconds);
+  }
+
 async function bubbleSort(arr){
     for (var j = 0; j < arr.length - 1; j++){
         for(var i = 0; i < arr.length - j - 1; i++){
@@ -141,30 +146,73 @@ async function bubbleSort(arr){
     }
 }
 
-function mergeSort(arr){
+var count = 8;
+var displayBars = bars;
+
+
+function mergeSort(arr,start){
     let len = arr.length;
     if (len <= 1) return arr;
 
     let mid = Math.floor(len / 2);
+    //console.log(arr);
 
-    let left = mergeSort(arr.slice(0,mid));
-    let right = mergeSort(arr.slice(mid));
-
-    return merge(left,right);
+    let left = mergeSort(arr.slice(0,mid),start);
+    let right = mergeSort(arr.slice(mid),mid+start);
+    console.log(start);
+    
+    return merge(left,right,start);
+    
+    
 }
 
-function merge(left,right){
-    let sortedArr = [];
 
-    while (left.length && right.length){
-        if (left[0].height < right[0].height){
-            sortedArr.push(left.shift());
-        }else {
-            sortedArr.push(right.shift());
+function merge(left,right,start){
+    let sortedArr = [];
+    sleep2(10);
+    console.log([left,right])
+    
+    
+    // bg();
+    // drawBars(sortedArr);
+    let index = 0;
+    let len = (left.length+right.length)
+    let l = 0;
+    let r = 0;
+    for(var i = 0; i < len;i++){
+        console.log([index,l,r])
+        if (l >= left.length){
+            displayBars[start+index] = right[r];
+            sortedArr[index] = right[r];
+            r++
+        }else if(r >= right.length){
+            displayBars[start+index] = left[l];
+            sortedArr[index] = left[l];
+            l++
+        }else{ 
+
+            if (left[l].height < right[r].height){
+                displayBars[start+index] = left[l];
+                // sortedArr.push(left[l]);
+                sortedArr[index] = left[l];
+                l++;
+            }else {
+                displayBars[start+index] = right[r];
+                // sortedArr.push(right[r]);
+                sortedArr[index] = right[r];
+                r++;
+            }
         }
+        index++;
     }
 
-    return [...sortedArr, ...left,...right];
+    console.log(displayBars);
+    console.log(sortedArr);
+
+
+    //console.log([...sortedArr, ...left,...right])
+    //return [...sortedArr, ...left,...right];
+    return sortedArr;
 }
 
 
