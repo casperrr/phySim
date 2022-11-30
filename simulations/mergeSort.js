@@ -17,6 +17,8 @@ var Color = function(r,g,b){
 var colorA = new Color(255,54,144);
 var colorB = new Color(0,186,214);
 
+var displayBars;
+
 
 //Event listner for inputs (Range slider only.)
 inputs.addEventListener("input", function(e){
@@ -41,7 +43,8 @@ document.querySelector(".element__btn__container").addEventListener("click",func
         switch(btnClicked.id){
             case "btnStart":
                 abortController = true;
-                mergeSort(bars);
+                displayBars = bars;
+                mergeSort(bars,0);
                 break;
             case "btnShuffle":
                 abortController = false;
@@ -80,7 +83,7 @@ function init(){
 }
 
 function bg(){
-    c.fillStyle = '#181818';
+    c.fillStyle = '#181a1b';
     c.fillRect(0,0,canvas.width,canvas.height);
 }
 
@@ -146,19 +149,18 @@ async function bubbleSort(arr){
     }
 }
 
-var count = 8;
-var displayBars = bars;
 
 
-function mergeSort(arr,start){
+
+async function mergeSort(arr,start){
     let len = arr.length;
     if (len <= 1) return arr;
 
     let mid = Math.floor(len / 2);
     //console.log(arr);
 
-    let left = mergeSort(arr.slice(0,mid),start);
-    let right = mergeSort(arr.slice(mid),mid+start);
+    let left = await mergeSort(arr.slice(0,mid),start);
+    let right = await mergeSort(arr.slice(mid),mid+start);
     console.log(start);
     
     return merge(left,right,start);
@@ -167,9 +169,9 @@ function mergeSort(arr,start){
 }
 
 
-function merge(left,right,start){
+async function merge(left,right,start){
     let sortedArr = [];
-    sleep2(10);
+    
     console.log([left,right])
     
     
@@ -180,7 +182,7 @@ function merge(left,right,start){
     let l = 0;
     let r = 0;
     for(var i = 0; i < len;i++){
-        console.log([index,l,r])
+        //console.log([index,l,r])
         if (l >= left.length){
             displayBars[start+index] = right[r];
             sortedArr[index] = right[r];
@@ -204,10 +206,16 @@ function merge(left,right,start){
             }
         }
         index++;
+        
+        bg();
+        //console.log(displayBars);
+        //console.log("index "+ index)
+        drawBars(displayBars);
+        await sleep(1);
     }
 
-    console.log(displayBars);
-    console.log(sortedArr);
+    //console.log(displayBars);
+    //console.log(sortedArr);
 
 
     //console.log([...sortedArr, ...left,...right])
