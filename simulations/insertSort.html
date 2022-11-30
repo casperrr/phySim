@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physim</title>
+    <link rel="stylesheet" href="/css/style copy.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Poppins:wght@100;200;500&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="Vector.js"></script>
+    
+</head>
+<body>
+    <!-- header -->
+    <header>
+        <nav>
+            <div ><a href="/index.html" id="logo">Phy<span>sim</span></a></div>
+            <ul class="nav__menu">
+                <li class="nav__items">
+                    <a href="/index.html" class="nav__links">Home</a>
+                </li>
+                <li class="nav__items">
+                    <a href="/simulations.html" class="nav__links">Simulations</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <section class="main__container">
+        <canvas height="500px" width="1000"></canvas>
+        
+
+                <div class="element__container">
+                    <div class="element n">
+                        <h2>Number of Bars</h2>
+                        <p>Adjust slider to change the number of bars.</p>
+                        <div class="slider__value__container">
+                            <h3>4</h3>
+                            <input type="range" min="4" max="200" value="80" class="slider" id="barNumInp">
+                            <h3>200</h3>
+                        </div>
+                        <!-- <h3 class="slider__value" id="len__val">120</h3>        -->
+                        <h3 class="slider__value">Bars = <span id="barNumInp__val">80</span></h3>       
+                    </div>
+                    <div class="element ctrlBtns">
+                        <div class="element__btn__container">
+                            <button class="btn start" id="btnStart">Start</button>
+                            <button class="btn shuffle" id="btnShuffle">Shuffle</button>
+                            <button class="btn gen" id="btnGen">Generate</button>
+                        </div>
+                    </div>
+                    <div class="element Speed">
+                        <h2>Animation Speed</h2>
+                        <p>Adjust slider to change the speed of the animation.</p>
+                        <div class="slider__value__container">
+                            <h3>1</h3>
+                            <input type="range" min="1" max="1000" value="200" class="slider" id="speed">
+                            <h3>1000</h3>
+                        </div>
+                        <!-- <h3 class="slider__value" id="len__val">120</h3>        -->
+                        <h3 class="slider__value">Speed = <span id="speed__val">200</span></h3>       
+                    </div>
+                    <!-- I need a generate, shuffle and start button. -->
+                    
+                </div>
+
+            
+        
+    </section>
+    <script src="insertSort.js"></script>
+</body>
+</html>
