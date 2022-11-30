@@ -4,6 +4,7 @@ const inputs = document.querySelector(".element__container");
 
 var abortController = true;
 var barNum = 80;
+var barNumInp = 80;
 var leftGap = 10;
 var speed = 200;
 var dist = canvas.width/barNum;
@@ -16,6 +17,8 @@ var Color = function(r,g,b){
 }
 var colorA = new Color(255,54,144);
 var colorB = new Color(0,186,214);
+
+var displayBars;
 
 
 //Event listner for inputs (Range slider only.)
@@ -41,7 +44,8 @@ document.querySelector(".element__btn__container").addEventListener("click",func
         switch(btnClicked.id){
             case "btnStart":
                 abortController = true;
-                bubbleSort(bars);
+                displayBars = bars;
+                mergeSort(bars,0);
                 break;
             case "btnShuffle":
                 abortController = false;
@@ -50,6 +54,7 @@ document.querySelector(".element__btn__container").addEventListener("click",func
                 drawBars(bars);
                 break;
             case "btnGen":
+                barNum = barNumInp;
                 abortController = false;
                 bars = [];
                 bg();
@@ -80,7 +85,7 @@ function init(){
 }
 
 function bg(){
-    c.fillStyle = '#181818';
+    c.fillStyle = '#181a1b';
     c.fillRect(0,0,canvas.width,canvas.height);
 }
 
@@ -121,29 +126,62 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function bubbleSort(arr){
-    for (var j = 0; j < arr.length - 1; j++){
-        for(var i = 0; i < arr.length - j - 1; i++){
-            if(abortController){
-                if (arr[i].height > arr[i + 1].height){
-                    [arr[i],arr[i+1]] = [arr[i+1],arr[i]];
+function sleep2(milliseconds) {
+    const start = Date.now();
+    while (Date.now() - start < milliseconds);
+  }
+
+
+async function mergeSort(arr,start){
+    let len = arr.length;
+    if (len <= 1) return arr;
+
+    let mid = Math.floor(len / 2);
+    let left = await mergeSort(arr.slice(0,mid),start);
+    let right = await mergeSort(arr.slice(mid),mid+start);
+    return merge(left,right,start);
+}
+
+
+async function merge(left,right,start){
+    let sortedArr = [];
+    let index = 0;
+    let len = (left.length+right.length)
+    let l = 0;
+    let r = 0;
+    for(var i = 0; i < len;i++){
+        if(abortController){
+                if (l >= left.length){
+                    displayBars[start+index] = right[r];
+                    sortedArr[index] = right[r];
+                    r++
+                }else if(r >= right.length){
+                    displayBars[start+index] = left[l];
+                    sortedArr[index] = left[l];
+                    l++
+                }else{ 
+                    if (left[l].height < right[r].height){
+                        displayBars[start+index] = left[l];
+                        sortedArr[index] = left[l];
+                    l++;
+                }else {
+                    displayBars[start+index] = right[r];
+                    sortedArr[index] = right[r];
+                    r++;
                 }
-                //console.log(arr);
-                //update frame here
-                await sleep(1000-speed);
-                bg();
-                drawBars(bars);
-                //requestAnimationFrame();
-            }else{
-                return;
             }
+            index++;
+            //draw each fram to screen
+            bg();
+            drawBars(displayBars);
+            await sleep(1000-speed);
+        }else{
+            return;
         }
     }
+    return sortedArr;
 }
 
 
 init();
-//shuffle(bars);
 drawBars(bars);
-//bubbleSort(bars);
-//loop();
