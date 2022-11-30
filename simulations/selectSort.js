@@ -42,7 +42,7 @@ document.querySelector(".element__btn__container").addEventListener("click",func
         switch(btnClicked.id){
             case "btnStart":
                 abortController = true;
-                insertSort(bars);
+                selectionSort(bars);
                 break;
             case "btnShuffle":
                 abortController = false;
