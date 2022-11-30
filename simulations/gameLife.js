@@ -68,6 +68,18 @@ function bg(){
     c.fillRect(0,0,canvas.width,canvas.height);
 }
 
+function drawGrid(arr){
+
+
+}
+
+function drawCell(x,y,w,h){
+    c.fillStyle = "rgb(255,10,100)";
+    c.beginPath();
+    c.roundRect(x,y,w,h,5);
+    c.fill();
+}
+
 function makeArray(cols, rows){
     let array = new Array(cols);
     for(let i = 0; i < cols; i++){
