@@ -6,43 +6,43 @@ var gridSize = 10;
 var cellArr;
 
 //Event listner for inputs (Range slider only.)
-inputs.addEventListener("input", function(e){
-    if (e.target !== e.currentTarget){
-        var inputChanged = e.target;
-        console.log(inputChanged.id, inputChanged.value, inputChanged.type);
-        window[inputChanged.id] = inputChanged.value;
-        console.log(`#${inputChanged.id}__val`);
-        document.querySelector(`#${inputChanged.id}__val`).innerHTML = inputChanged.value;    }
-    e.stopPropagation;
-},false);
+// inputs.addEventListener("input", function(e){
+//     if (e.target !== e.currentTarget){
+//         var inputChanged = e.target;
+//         console.log(inputChanged.id, inputChanged.value, inputChanged.type);
+//         window[inputChanged.id] = inputChanged.value;
+//         console.log(`#${inputChanged.id}__val`);
+//         document.querySelector(`#${inputChanged.id}__val`).innerHTML = inputChanged.value;    }
+//     e.stopPropagation;
+// },false);
 
-//event handler for the buttons
-document.querySelector(".element__btn__container").addEventListener("click",function(e){
-    if(e.target !== e.currentTarget){
-        var btnClicked = e.target;
-        switch(btnClicked.id){
-            case "btnStart":
-                abortController = true;
-                insertSort(bars);
-                break;
-            case "btnShuffle":
-                abortController = false;
-                shuffle(bars);
-                bg();
-                drawBars(bars);
-                break;
-            case "btnGen":
-                barNum = barNumInp;
-                abortController = false;
-                bars = [];
-                bg();
-                init();
-                drawBars(bars);
-                break;
-        }
-    }
-    e.stopPropagation();
-},false)
+// //event handler for the buttons
+// document.querySelector(".element__btn__container").addEventListener("click",function(e){
+//     if(e.target !== e.currentTarget){
+//         var btnClicked = e.target;
+//         switch(btnClicked.id){
+//             case "btnStart":
+//                 abortController = true;
+//                 insertSort(bars);
+//                 break;
+//             case "btnShuffle":
+//                 abortController = false;
+//                 shuffle(bars);
+//                 bg();
+//                 drawBars(bars);
+//                 break;
+//             case "btnGen":
+//                 barNum = barNumInp;
+//                 abortController = false;
+//                 bars = [];
+//                 bg();
+//                 init();
+//                 drawBars(bars);
+//                 break;
+//         }
+//     }
+//     e.stopPropagation();
+// },false)
 
 
 //REMEBER TO USE STROKE AS PADDING.
@@ -69,8 +69,12 @@ function bg(){
 }
 
 function drawGrid(arr){
-
-
+    let w = canvas.width/gridSize;
+    for(let i = 0; i < gridSize; i++){
+        for(let j = 0; j < gridSize; j++){
+            if(arr[j][i] == 1) drawCell(j*w,i*w,w,w);
+        }
+    }
 }
 
 function drawCell(x,y,w,h){
@@ -88,3 +92,5 @@ function makeArray(cols, rows){
     return array;
 }
 
+init();
+drawGrid(cellArr);
