@@ -42,17 +42,30 @@ document.querySelector(".element__btn__container").addEventListener("click",func
     e.stopPropagation();
 },false)
 
+var gridSize = 10;
+//REMEBER TO USE STROKE AS PADDING.
+
+
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 
 function init(){
-
+    
 }
 
 function bg(){
     c.fillStyle = '#181818';
     c.fillRect(0,0,canvas.width,canvas.height);
+}
+
+function makeArray(cols, rows){
+    let array = new Array(cols);
+    for(let i = 0; i < cols; i++){
+        array[i] = new Array(rows);
+    }
+    return array;
 }
 
