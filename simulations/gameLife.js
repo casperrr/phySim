@@ -72,7 +72,7 @@ function drawGrid(arr){
     let w = canvas.width/gridSize;
     for(let i = 0; i < gridSize; i++){
         for(let j = 0; j < gridSize; j++){
-            if(arr[j][i] == 1) drawCell(j*w,i*w,w,w);
+            if(arr[i][j] == 1) drawCell(j*w,i*w,w,w);
         }
     }
 }
@@ -93,6 +93,43 @@ function makeArray(cols, rows){
         array[i] = new Array(rows);
     }
     return array;
+}
+
+//Sum of cells imediate neighbors:
+function nSum(x,y){
+    let sum = 0;
+    for(let i = -1; i < 2; i++){
+        for(let j = -1; j < 2; j++){
+            let col = (x+i+gridSize)%gridSize;
+            let row = (y+j+gridSize)%gridSize;
+            sum += cellArr[col][row];
+        }
+    }
+    sum -= cellArr[x][y]; //we do not count the middle square as itself is not concidered a neighbor.
+    return sum;
+}
+
+//Creates the next generation of the board using the rules of the game.
+function nextGen(){
+    let newArry = makeArray(gridSize,gridSize);
+    for(let i = 0; i < gridSize; i++){
+        for(let j = 0; j < gridSize; j++){
+            if(cellArr[i][j] == 1){
+                if(nSum(i,j) < 2 || nSum(i,j) > 3){
+                    newArry[i][j] = 0;
+                }else{
+                    newArry[i][j] = 1;
+                }
+            }else{
+                if(nSum(i,j) == 3){
+                    newArry[i][j] = 1;
+                }else {
+                    newArry[i][j] = 0;
+                }
+            }
+        }
+    }
+    cellArr = newArry;
 }
 
 init();
