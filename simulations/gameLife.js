@@ -2,7 +2,7 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext("2d");
 const inputs = document.querySelector(".element__container");
 
-var gridSize = 10;
+var gridSize = 70;
 var cellArr;
 
 //Event listner for inputs (Range slider only.)
@@ -53,6 +53,23 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function sleep2(milliseconds) {
+    const start = Date.now();
+    while (Date.now() - start < milliseconds);
+}
+
+
+function loop(){
+    nextGen();
+    bg();
+    drawGrid(cellArr);
+    console.log("RUNNING");
+
+    sleep2(50);
+    requestAnimationFrame(loop);
+}
+
+
 
 function init(){
     cellArr = makeArray(gridSize,gridSize);
@@ -80,7 +97,7 @@ function drawGrid(arr){
 function drawCell(x,y,w,h){
     c.fillStyle = "rgb(255,10,100)";
     c.strokeStyle = "#181818";
-    c.lineWidth = 4;
+    c.lineWidth = 1;
     c.beginPath();
     c.roundRect(x,y,w,h,10);
     c.fill();
@@ -134,3 +151,4 @@ function nextGen(){
 
 init();
 drawGrid(cellArr);
+loop();
