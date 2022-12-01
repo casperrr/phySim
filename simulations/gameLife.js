@@ -2,7 +2,7 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext("2d");
 const inputs = document.querySelector(".element__container");
 
-var gridSizeCol = 50;
+var gridSizeCol = 80;
 // var gridSizeRow = 12;
 var gridSizeRow = gridSizeCol*2;
 var cellArr;
