@@ -165,6 +165,13 @@ canvas.addEventListener("mousedown", function(e){
 },false);
 
 canvas.addEventListener("mouseup",function(){
+    for(let i = 0; i < gridSize; i++){
+        for(let j = 0; j < gridSize; j++){
+            if(drawCellArr[i][j] == 1){
+                cellArr[i][j] = drawCellArr[i][j];
+            }
+        }
+    }
     mDown = false;
 },false)
 
