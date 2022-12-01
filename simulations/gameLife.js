@@ -4,7 +4,9 @@ const inputs = document.querySelector(".element__container");
 
 var gridSize = 70;
 var cellArr;
+var drawCellArr; //array that holds the pixels to be drawn too
 var mDown = false;
+var mPos = [0,0];
 
 //Event listner for inputs (Range slider only.)
 // inputs.addEventListener("input", function(e){
@@ -63,6 +65,7 @@ function sleep2(milliseconds) {
 
 function loop(){
     nextGen();
+    cellPaint(mPos[0],mPos[1]);
     bg();
     drawGrid(cellArr);
     //console.log("RUNNING");
@@ -162,26 +165,41 @@ canvas.addEventListener("mouseup",function(){
 },false)
 
 canvas.addEventListener("mousemove",function(e){
-    getMousePos(e)
+    //getMousePos(e)
+    mPos = getMousePos(e);
 },false)
 
 function cellPaint(x,y){
+    console.log(x,y)
     if(mDown){
         var cell = 
             [Math.floor(gridSize/canvas.width*x),
             Math.floor(gridSize/canvas.height*y)];
-        console.log(cell);
+        cellArr[cell[1]][cell[0]] = 1;
     }
 }
 //remeber that to get the cell with mouse you can do gridSize/canvas.width*mousePos
 
 
+
+// function getMousePos(e) {
+//     var rect = canvas.getBoundingClientRect();
+//     cellPaint(
+//          (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
+//          (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height);
+// }
+
 function getMousePos(e) {
     var rect = canvas.getBoundingClientRect();
-    cellPaint(
-         (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
-         (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height);
+    return [
+        (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
+        (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height]
 }
+
+//REMINDER draw cells ontop of render and then when mouse up do the thing
+
+
+
 // function getMousePos(e) {
 //     var rect = canvas.getBoundingClientRect();
 //     return {
