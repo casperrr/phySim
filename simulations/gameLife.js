@@ -167,7 +167,10 @@ canvas.addEventListener("mousemove",function(e){
 
 function cellPaint(x,y){
     if(mDown){
-        console.log([x,y])
+        var cell = 
+            [Math.floor(gridSize/canvas.width*x),
+            Math.floor(gridSize/canvas.height*y)];
+        console.log(cell);
     }
 }
 //remeber that to get the cell with mouse you can do gridSize/canvas.width*mousePos
