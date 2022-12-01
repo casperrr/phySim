@@ -2,7 +2,9 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext("2d");
 const inputs = document.querySelector(".element__container");
 
-var gridSize = 70;
+var gridSizeCol = 50;
+// var gridSizeRow = 12;
+var gridSizeRow = gridSizeCol*2;
 var cellArr;
 var drawCellArr; //array that holds the pixels to be drawn too
 var mDown = false;
@@ -73,7 +75,7 @@ function loop(){
     }
     //console.log("RUNNING");
 
-    sleep2(5);
+    sleep2(10);
     requestAnimationFrame(loop);
 }
 
@@ -81,9 +83,9 @@ function loop(){
 
 
 function init(){
-    cellArr = makeArray(gridSize,gridSize);
-    for(let i = 0; i < gridSize; i++){
-        for(let j = 0; j < gridSize; j++){
+    cellArr = makeArray(gridSizeCol,gridSizeRow);
+    for(let i = 0; i < gridSizeCol; i++){
+        for(let j = 0; j < gridSizeRow; j++){
             cellArr[i][j] = Math.floor(Math.random()*2);
         }
     }
@@ -95,10 +97,11 @@ function bg(){
 }
 
 function drawGrid(arr){
-    let w = canvas.width/gridSize;
-    for(let i = 0; i < gridSize; i++){
-        for(let j = 0; j < gridSize; j++){
-            if(arr[i][j] == 1) drawCell(j*w,i*w,w,w);
+    let w = canvas.width/gridSizeRow;
+    let h = canvas.height/gridSizeCol;
+    for(let i = 0; i < gridSizeCol; i++){
+        for(let j = 0; j < gridSizeRow; j++){
+            if(arr[i][j] == 1) drawCell(j*w,i*h,w,h);
         }
     }
 }
@@ -108,7 +111,7 @@ function drawCell(x,y,w,h){
     c.strokeStyle = "#181818";
     c.lineWidth = 1;
     c.beginPath();
-    c.roundRect(x,y,w,h,10);
+    c.roundRect(x,y,w,h,4);
     c.fill();
     c.stroke();
 }
@@ -126,8 +129,8 @@ function nSum(x,y){
     let sum = 0;
     for(let i = -1; i < 2; i++){
         for(let j = -1; j < 2; j++){
-            let col = (x+i+gridSize)%gridSize;
-            let row = (y+j+gridSize)%gridSize;
+            let col = (x+i+gridSizeCol)%gridSizeCol;
+            let row = (y+j+gridSizeRow)%gridSizeRow;
             sum += cellArr[col][row];
         }
     }
@@ -137,9 +140,9 @@ function nSum(x,y){
 
 //Creates the next generation of the board using the rules of the game.
 function nextGen(){
-    let newArry = makeArray(gridSize,gridSize);
-    for(let i = 0; i < gridSize; i++){
-        for(let j = 0; j < gridSize; j++){
+    let newArry = makeArray(gridSizeCol,gridSizeRow);
+    for(let i = 0; i < gridSizeCol; i++){
+        for(let j = 0; j < gridSizeRow; j++){
             if(cellArr[i][j] == 1){
                 if(nSum(i,j) < 2 || nSum(i,j) > 3){
                     newArry[i][j] = 0;
@@ -160,13 +163,13 @@ function nextGen(){
 
 //drawing section
 canvas.addEventListener("mousedown", function(e){
-    drawCellArr = makeArray(gridSize,gridSize);
+    drawCellArr = makeArray(gridSizeRow,gridSizeCol);
     mDown = true;
 },false);
 
 canvas.addEventListener("mouseup",function(){
-    for(let i = 0; i < gridSize; i++){
-        for(let j = 0; j < gridSize; j++){
+    for(let i = 0; i < gridSizeCol; i++){
+        for(let j = 0; j < gridSizeRow; j++){
             if(drawCellArr[i][j] == 1){
                 cellArr[i][j] = drawCellArr[i][j];
             }
@@ -181,15 +184,16 @@ canvas.addEventListener("mousemove",function(e){
 },false)
 
 function cellPaint(x,y){
-    console.log(x,y)
+    //console.log(x,y)
     if(mDown){
         var cell = 
-            [Math.floor(gridSize/canvas.width*x),
-            Math.floor(gridSize/canvas.height*y)];
+            [Math.floor(gridSizeRow/canvas.width*x),
+            Math.floor(gridSizeCol/canvas.height*y)];
+        console.log(cell);
         drawCellArr[cell[1]][cell[0]] = 1;
     }
 }
-//remeber that to get the cell with mouse you can do gridSize/canvas.width*mousePos
+//remeber that to get the cell with mouse you can do gridSizeCol/canvas.width*mousePos
 
 
 
