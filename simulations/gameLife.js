@@ -68,6 +68,9 @@ function loop(){
     cellPaint(mPos[0],mPos[1]);
     bg();
     drawGrid(cellArr);
+    if(mDown){
+        drawGrid(drawCellArr);
+    }
     //console.log("RUNNING");
 
     sleep2(5);
@@ -157,6 +160,7 @@ function nextGen(){
 
 //drawing section
 canvas.addEventListener("mousedown", function(e){
+    drawCellArr = makeArray(gridSize,gridSize);
     mDown = true;
 },false);
 
@@ -175,7 +179,7 @@ function cellPaint(x,y){
         var cell = 
             [Math.floor(gridSize/canvas.width*x),
             Math.floor(gridSize/canvas.height*y)];
-        cellArr[cell[1]][cell[0]] = 1;
+        drawCellArr[cell[1]][cell[0]] = 1;
     }
 }
 //remeber that to get the cell with mouse you can do gridSize/canvas.width*mousePos
