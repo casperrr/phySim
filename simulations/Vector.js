@@ -1,5 +1,7 @@
 // Custom Vector class used for vector maths in simulations.
 
+
+
 class Vector{
 
     constructor(x,y){
@@ -16,6 +18,7 @@ class Vector{
         this.x -= vec.x;
         this.y -= vec.y;
     }
+    
 
     mult(scl){
         this.x *= scl;
