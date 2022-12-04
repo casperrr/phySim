@@ -73,6 +73,55 @@ nav{
 
 /* Main section */
 
+.home__title{
+    position:relative;
+    z-index: 20;
+    color: white;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    /* margin-left: 60px; */
+    /* margin-left: 20%; */
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+.home__welcome__container{
+    width: 700px;
+    margin-right:600px;
+}
+
+.home__title__main{
+    margin-top: 40px;
+    /* justify-content: center; */
+    /* align-items: center; */
+    font-size: 5rem;
+    font-weight: 300;
+    /* padding-right: 100px; */
+    /* margin-left: 60px; */
+    line-height: 80px;
+}
+
+.physim1{
+    color: pink;
+    font-weight: 400;
+}
+
+.physim2{
+    color: hotpink;
+    font-weight: 400;
+}
+
+.home__about{
+    display: flex;
+
+    margin-top: 20px;
+    font-weight: 200;
+    font-size: 1.3rem;
+    /* width: 700px; */
+}
+
 .main {
     background-color: #1f1f1f;
     color: white;
