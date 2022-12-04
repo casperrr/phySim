@@ -153,24 +153,31 @@ nav{
 
 /* canvas */
 
-.main__container {
+/* .main__container {
     background-color: #181818;
     display: flex;
     flex-wrap: wrap;
     width: 75%;
     margin: auto;
     flex-direction: row;
-    /* overflow: hidden; */
     justify-content: center;
    
+} */
+
+.main__container{
+    display: flex;
+    background-color: #181818;
+    justify-content: center;
+    flex-direction: column;
 }
 
 canvas {
-    padding: 40px;
+    margin: 40px;
+    /* padding: 40px; */
     background-color: #181818;
     float: left;
-    padding-bottom: 0;
-    
+    /* padding-bottom: 0; */
+    margin-bottom: 0;
     
 }
 
