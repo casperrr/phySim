@@ -122,6 +122,64 @@ nav{
     /* width: 700px; */
 }
 
+.home__sim__btn{
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+}
+
+.home__sim__btn p{
+    font-weight: 100;
+}
+
+.home__sim__btn button{
+    padding: 14px 32px;
+    background-image: linear-gradient(to top, #ff0080 0%,#f8174f 100%);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.35s;
+    outline: none;
+    box-shadow: 1px 0px 13px 3px rgba(255, 0, 85, 0.5);;
+}
+
+.home__sim__btn a{
+    text-decoration: none;
+    color: white;
+    position: relative;
+    font-weight: 400;
+    font-size: 14pt;
+    z-index: 2;
+}
+
+.home__sim__btn button:after{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-image: linear-gradient(to top, #0066ff 0%, #2f2bff 100%);
+    
+    transition: all 0.35s;
+    border-radius: 4px;
+}
+
+.home__sim__btn button:hover{
+    color: white;
+    box-shadow: 0px 0px 0px 0px rgba(255, 0, 85, 0.3);;
+}
+
+.home__sim__btn button:hover:after{
+    width: 100%;
+    box-shadow: 1px 0px 13px 3px rgba(0, 81, 255, 0.5);;
+}
+
+
+
+
 .main {
     background-color: #1f1f1f;
     color: white;
