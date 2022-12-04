@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Poppins:wght@100;200;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script src="/simulations/Vector.js"></script>
 </head>
 <body>
 
@@ -28,12 +29,38 @@
         </nav>
     </header>
 
+
+    <section class="mainCanvas__container">
+        <canvas id="homeCanvasBackground"></canvas>
+        <script src="homeCanvas2.js"></script>
+    </section>
+
+    <div class="home__title">
+        <div class="home__welcome__container">
+
+            <h1 class="home__title__main">
+                Welcome to<br><span class="physim1" >Phy</span><span class="physim2">sim</span>
+            </h1>
+            <p class="home__about">
+                Physim is a web-based concept visualiser. Browse the selection of interactive and visual simulations from a variety of topics. From physics to computer-science.
+            </p>
+        </div>
+        <div class="home__sim__btn">
+            <p>Press the button below to start exploring!</p>
+            <button>
+                <a href="simulations.html">
+                    Simulations
+                </a>
+            </button>
+        </div>
+
+    </div>
     <!-- Main section -->
-    <div class="main">    
+    <!-- <div class="main">    
         <div class="main__welcome">
             <h1 id="welcome_text">Welcome to Physim</h1>
             <h3 class="main__text">Physim is a simple physics engine that runs in a browser. There are a many simulations to chose from all with adjustable parameters to change in real time. Physim can be used as a teaching tool or just for fun. Click below the explore the different simulations.</h2>
         </div>
-    </div>
+    </div> -->
 </body>
 </html>
