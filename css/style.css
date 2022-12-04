@@ -83,13 +83,14 @@ nav{
     /* margin-left: 60px; */
     /* margin-left: 20%; */
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     user-select: none;
 }
 
 .home__welcome__container{
-    width: 700px;
-    margin-right:600px;
+    max-width: 700px;
+    /* margin-right:600px; */
+    margin-left: 250px;
 }
 
 .home__title__main{
@@ -126,10 +127,13 @@ nav{
     display: flex;
     flex-direction: column;
     margin-top: 100px;
+    align-items: center;
+    gap: 15px;
 }
 
 .home__sim__btn p{
     font-weight: 100;
+    font-size: large;
 }
 
 .home__sim__btn button{
@@ -149,8 +153,8 @@ nav{
     text-decoration: none;
     color: white;
     position: relative;
-    font-weight: 400;
-    font-size: 14pt;
+    font-weight: 300;
+    font-size: 26pt;
     z-index: 2;
 }
 
