@@ -66,7 +66,7 @@ window.onload = function() {
     }
  
     function bg() {
-       ctx.fillStyle = "#181818";
+       ctx.fillStyle = "#1818182a";
        ctx.fillRect(0, 0, canvas.width, canvas.height);
        //ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
