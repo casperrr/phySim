@@ -309,12 +309,22 @@ canvas {
     grid-row: span 2;
   }
 
+  .element__btn__single{
+    background: #272727;
+    padding: 10px 10px;
+    border-radius: 20px;
+    box-shadow: 1px 0px 10px 4px rgb(0,0,0,0.3);
+
+  }
+
   .element__btn__container{
     display: flex;
     gap: 10px;
     padding:8px 0px;
     flex-wrap: wrap;
     height: 100%;
+    width: 100%;
+    justify-content: space-evenly;
   }
 
   .btn{
@@ -323,7 +333,7 @@ canvas {
     text-decoration: none;
     padding: 10px 20px;
     
-    width: 100%;
+    /* width: 100%; */
     border: none;
     outline: none;
     border-radius: 10px;

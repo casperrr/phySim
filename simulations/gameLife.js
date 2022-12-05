@@ -2,6 +2,7 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext("2d");
 const inputs = document.querySelector(".element__container");
 
+var gridSizeColInp;
 var gridSizeCol = 80;
 // var gridSizeRow = 12;
 var gridSizeRow = gridSizeCol*2;
@@ -23,32 +24,32 @@ inputs.addEventListener("input", function(e){
 },false);
 
 //event handler for the buttons
-// document.querySelector(".element__btn__container").addEventListener("click",function(e){
-//     if(e.target !== e.currentTarget){
-//         var btnClicked = e.target;
-//         switch(btnClicked.id){
-//             case "btnStart":
-//                 abortController = true;
-//                 insertSort(bars);
-//                 break;
-//             case "btnShuffle":
-//                 abortController = false;
-//                 shuffle(bars);
-//                 bg();
-//                 drawBars(bars);
-//                 break;
-//             case "btnGen":
-//                 barNum = barNumInp;
-//                 abortController = false;
-//                 bars = [];
-//                 bg();
-//                 init();
-//                 drawBars(bars);
-//                 break;
-//         }
-//     }
-//     e.stopPropagation();
-// },false)
+document.querySelector(".element__btn__container").addEventListener("click",function(e){
+    if(e.target !== e.currentTarget){
+        var btnClicked = e.target;
+        switch(btnClicked.id){
+            case "btnStart":
+                abortController = true;
+                insertSort(bars);
+                break;
+            case "btnShuffle":
+                abortController = false;
+                shuffle(bars);
+                bg();
+                drawBars(bars);
+                break;
+            case "btnGen":
+                barNum = barNumInp;
+                abortController = false;
+                bars = [];
+                bg();
+                init();
+                drawBars(bars);
+                break;
+        }
+    }
+    e.stopPropagation();
+},false)
 
 
 //REMEBER TO USE STROKE AS PADDING.
