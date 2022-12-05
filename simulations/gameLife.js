@@ -6,22 +6,23 @@ var gridSizeCol = 80;
 // var gridSizeRow = 12;
 var gridSizeRow = gridSizeCol*2;
 var cellArr;
+var speed;
 var drawCellArr; //array that holds the pixels to be drawn too
 var mDown = false;
 var mPos = [0,0];
 
-//Event listner for inputs (Range slider only.)
-// inputs.addEventListener("input", function(e){
-//     if (e.target !== e.currentTarget){
-//         var inputChanged = e.target;
-//         console.log(inputChanged.id, inputChanged.value, inputChanged.type);
-//         window[inputChanged.id] = inputChanged.value;
-//         console.log(`#${inputChanged.id}__val`);
-//         document.querySelector(`#${inputChanged.id}__val`).innerHTML = inputChanged.value;    }
-//     e.stopPropagation;
-// },false);
+// Event listner for inputs (Range slider only.)
+inputs.addEventListener("input", function(e){
+    if (e.target !== e.currentTarget){
+        var inputChanged = e.target;
+        console.log(inputChanged.id, inputChanged.value, inputChanged.type);
+        window[inputChanged.id] = inputChanged.value;
+        console.log(`#${inputChanged.id}__val`);
+        document.querySelector(`#${inputChanged.id}__val`).innerHTML = inputChanged.value;    }
+    e.stopPropagation;
+},false);
 
-// //event handler for the buttons
+//event handler for the buttons
 // document.querySelector(".element__btn__container").addEventListener("click",function(e){
 //     if(e.target !== e.currentTarget){
 //         var btnClicked = e.target;
@@ -65,7 +66,7 @@ function sleep2(milliseconds) {
 }
 
 
-function loop(){
+async function loop(){
     nextGen();
     cellPaint(mPos[0],mPos[1]);
     bg();
@@ -75,7 +76,7 @@ function loop(){
     }
     //console.log("RUNNING");
 
-    sleep2(10);
+    await sleep(speed);
     requestAnimationFrame(loop);
 }
 

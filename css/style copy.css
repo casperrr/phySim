@@ -153,26 +153,33 @@ nav{
 
 /* canvas */
 
-/* .main__container {
+.main__container {
     background-color: #181818;
     display: flex;
     flex-wrap: wrap;
-    width: 75%;
+    /* width: 75%; */
     margin: auto;
     flex-direction: row;
-    justify-content: center;
-   
-} */
+    justify-content: flex-start;
+    align-items: flex-start;
+    transition: all 0.35 ease;
+}
 
-.main__container{
+/* .main__container{
     display: flex;
     background-color: #181818;
     justify-content: center;
-    flex-direction: column;
-}
+    flex-wrap: wrap;
+} */
+
+/* .main__container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(600px,1fr));
+} */
 
 canvas {
     margin: 40px;
+    margin-top: 10;
     /* padding: 40px; */
     background-color: #181818;
     float: left;
@@ -188,9 +195,13 @@ canvas {
     gap: 20px;
     margin: 20px;
     /* flex-wrap: wrap; */
-    width: 100%;
-    /* grid-template-columns: repeat(auto-fit,minmax(600px,1fr)); */
-    grid-template-columns: 85% 15%;
+    /* width: 100%; */
+    /* width: 1200px; */
+    grid-template-columns: repeat(auto-fit,minmax(500px,1fr));
+    /* grid-template-columns: 85% 15%; */
+    /* align-items: stretch; */
+    justify-items: start;
+    transition: all 0.35 ease;
 }
 
 
@@ -211,14 +222,32 @@ canvas {
     padding-top: 5px;
     padding-bottom: 5px;
     font-family: "Poppins", sans-serif;
+    width: 500px;
 }
 
+@media (max-width:1800px){
+    .element__container{
+        width: 1200px;
+        transition: all 0.35 ease;
+    }
+    .main__container{
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.35 ease;
+    }
+}
+
+
 .element h2{
-    font-weight: 400;
+    font-weight: 600;
+    font-size: 14pt;
 }
 
 .element p{
     font-weight: 300;
+    font-size: 12pt;
     color: #ffffffb9;
 }
 
@@ -227,6 +256,7 @@ canvas {
     align-items: baseline;
     width: 100%;
     gap: 10px;
+    font-size: 11pt;
 }
 
 .slider__value__container h3{
@@ -236,6 +266,7 @@ canvas {
 
 .slider__value{
     font-weight: 200;
+    font-size: 11pt;
 }
 
 
