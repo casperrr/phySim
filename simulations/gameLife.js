@@ -7,6 +7,7 @@ var gridSizeCol = 80;
 // var gridSizeRow = 12;
 var gridSizeRow = gridSizeCol*2;
 var cellArr;
+var paused = false;
 var speed;
 var drawCellArr; //array that holds the pixels to be drawn too
 var mDown = false;
@@ -28,23 +29,25 @@ document.querySelector(".element__btn__container").addEventListener("click",func
     if(e.target !== e.currentTarget){
         var btnClicked = e.target;
         switch(btnClicked.id){
-            case "btnStart":
-                abortController = true;
-                insertSort(bars);
-                break;
-            case "btnShuffle":
-                abortController = false;
-                shuffle(bars);
-                bg();
-                drawBars(bars);
-                break;
-            case "btnGen":
-                barNum = barNumInp;
-                abortController = false;
-                bars = [];
-                bg();
+            case "btnUpdate":
+                //paused = true;
+                gridSizeCol = parseInt(gridSizeColInp);
+                gridSizeRow = gridSizeCol*2;
                 init();
-                drawBars(bars);
+                break;
+            case "btnClear":
+                cellArr = new Array(gridSizeCol).fill(new Array(gridSizeRow).fill(0));
+                break;
+            case "btnPause":
+                paused = !paused;
+                if(paused){
+                    btnClicked.innerHTML = "Play";
+                }else{
+                    btnClicked.innerHTML = "Pause";
+                }
+                break;
+            case "btnFill":
+                init();
                 break;
         }
     }
@@ -68,7 +71,7 @@ function sleep2(milliseconds) {
 
 
 async function loop(){
-    nextGen();
+    if(!paused) nextGen();
     cellPaint(mPos[0],mPos[1]);
     bg();
     drawGrid(cellArr);
