@@ -3,7 +3,7 @@ const c = canvas.getContext("2d");
 const inputs = document.querySelector(".element__container");
 
 var abortController = true;
-var barNum = 80;
+var barNum = 10;
 var barNumInp = 80;
 var leftGap = 10;
 var speed = 200;
@@ -17,8 +17,6 @@ var Color = function(r,g,b){
 }
 var colorA = new Color(255,54,144);
 var colorB = new Color(0,186,214);
-
-var displayBars;
 
 
 //Event listner for inputs (Range slider only.)
@@ -44,8 +42,7 @@ document.querySelector(".element__btn__container").addEventListener("click",func
         switch(btnClicked.id){
             case "btnStart":
                 abortController = true;
-                displayBars = bars;
-                mergeSort(bars,0);
+                selectionSort(bars);
                 break;
             case "btnShuffle":
                 abortController = false;
@@ -73,6 +70,12 @@ class Bar{
     }
 }
 
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
 function init(){
     bars = [];
     dist = canvas.width/barNum;
@@ -81,19 +84,11 @@ function init(){
     for(var i = 0; i < barNum; i++){
         bars.push(new Bar(i+1,colorLerp(colorA,colorB,i/barNum)));
     }
-    //shuffle(bars);
 }
 
 function bg(){
     c.fillStyle = '#181818';
     c.fillRect(0,0,canvas.width,canvas.height);
-}
-
-function loop(){
-    bg();
-    drawBars(bars);
-
-    requestAnimationFrame(loop);
 }
 
 function drawBars(arr){
@@ -126,60 +121,50 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function sleep2(milliseconds) {
-    const start = Date.now();
-    while (Date.now() - start < milliseconds);
-  }
-
-
-async function mergeSort(arr,start){
-    let len = arr.length;
-    if (len <= 1) return arr;
-
-    let mid = Math.floor(len / 2);
-    let left = await mergeSort(arr.slice(0,mid),start);
-    let right = await mergeSort(arr.slice(mid),mid+start);
-    return merge(left,right,start);
+async function insertSort(arr){
+    for (let i = 1; i < arr.length; i++){
+        let key = arr[i];
+        let j = i - 1;
+        while(j >= 0 && arr[j].height > key.height){
+            if (abortController){
+                arr[j+1] = arr[j];
+                j--;
+            }else{
+                return;
+            }
+        }
+        arr[j+1] = key;
+        //draw here
+        bg();
+        drawBars(bars);
+        await sleep(1000-speed);
+    }
 }
 
-
-async function merge(left,right,start){
-    let sortedArr = [];
-    let index = 0;
-    let len = (left.length+right.length)
-    let l = 0;
-    let r = 0;
-    for(var i = 0; i < len;i++){
-        if(abortController){
-                if (l >= left.length){
-                    displayBars[start+index] = right[r];
-                    sortedArr[index] = right[r];
-                    r++
-                }else if(r >= right.length){
-                    displayBars[start+index] = left[l];
-                    sortedArr[index] = left[l];
-                    l++
-                }else{ 
-                    if (left[l].height < right[r].height){
-                        displayBars[start+index] = left[l];
-                        sortedArr[index] = left[l];
-                    l++;
-                }else {
-                    displayBars[start+index] = right[r];
-                    sortedArr[index] = right[r];
-                    r++;
+async function selectionSort(arr){
+    for(let i = 0; i<arr.length; i++){
+      //find min number in subarray 
+      //and place it at ith position
+        let minptr = i;
+        for(let j = i+1; j<arr.length; j++){
+            if(abortController){
+                if(arr[minptr].height > arr[j].height){
+                    minptr = j;
                 }
+            }else{
+                return;
             }
-            index++;
-            //draw each fram to screen
-            bg();
-            drawBars(displayBars);
-            await sleep(1000-speed);
-        }else{
-            return;
         }
+      //swap
+        let temp = arr[i];
+        arr[i] = arr[minptr];
+        arr[minptr] = temp;
+        //draw
+        bg();
+        drawBars(bars);
+        await sleep(1000-speed)
     }
-    return sortedArr;
+    //return arr;
 }
 
 

@@ -255,6 +255,25 @@ nav{
     background-image: url(/res/pend_img.png);
 }
 
+.img2{
+    background-image: url(/res/bble_img.png);
+}
+
+.img3{
+    background-image: url(/res/merg_img.png);
+}
+.img4{
+    background-image: url(/res/insert_img.png);
+}
+.img5{
+    background-image: url(/res/sel_img.png);
+}
+.img6{
+    background-image: url(/res/gol_img.png);
+}
+
+
+
 .card h3{
     color: #d3d3d3;
     padding: 15px;
@@ -266,15 +285,6 @@ nav{
     color: #d3d3d38f;
     padding: 0px 20px 20px 20px;
 }
-
-
-
-
-
-
-
-
-
 
 /* canvas */
 
