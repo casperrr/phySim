@@ -252,24 +252,24 @@ nav{
 }
 
 .img1{
-    background-image: url(/res/pend_img.png);
+    background-image: url(../res/pend_img.png);
 }
 
 .img2{
-    background-image: url(/res/bble_img.png);
+    background-image: url(../res/bble_img.png);
 }
 
 .img3{
-    background-image: url(/res/merg_img.png);
+    background-image: url(../res/merg_img.png);
 }
 .img4{
-    background-image: url(/res/insert_img.png);
+    background-image: url(../res/insert_img.png);
 }
 .img5{
-    background-image: url(/res/sel_img.png);
+    background-image: url(../res/sel_img.png);
 }
 .img6{
-    background-image: url(/res/gol_img.png);
+    background-image: url(../res/gol_img.png);
 }
 
 
