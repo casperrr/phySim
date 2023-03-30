@@ -36,7 +36,7 @@ document.querySelector(".element__btn__container").addEventListener("click",func
                 init();
                 break;
             case "btnClear":
-                cellArr = new Array(gridSizeCol).fill(new Array(gridSizeRow).fill(0));
+                cellArr = Array(gridSizeCol).fill(null).map(()=>Array(gridSizeRow).fill(0));
                 break;
             case "btnPause":
                 paused = !paused;
