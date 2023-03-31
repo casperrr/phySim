@@ -73,10 +73,19 @@ function onMouseUp(){
 }
 
 function onMouseMove(event){
-    var mousePos = new Vector(event.pageX,event.pageY);
+    // var mousePos = new Vector(event.pageX,event.pageY);
+    let mousePosArr = getMousePos(event);
+    var mousePos = new Vector(mousePosArr[0],mousePosArr[1]);
     var mouseAng = Math.atan2(origin.y - mousePos.y,origin.x - mousePos.x);
     //console.log(mouseAng);
     pen.moveToMouse(-mouseAng - Math.PI/2);
+}
+
+function getMousePos(e) {
+    var rect = canvas.getBoundingClientRect();
+    return [
+        (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
+        (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height]
 }
 
 
@@ -134,6 +143,7 @@ class Pendulum{
 
         //draw vectors
         if (false){
+            //gravity vector
             c.save();
             c.translate(this.bob.x,this.bob.y);
             c.beginPath();
@@ -143,6 +153,7 @@ class Pendulum{
             c.stroke();
             c.restore();
             
+            //force on bob vector
             c.save();
             c.translate(this.bob.x,this.bob.y);
             c.beginPath();
