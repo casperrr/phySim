@@ -159,8 +159,9 @@ window.onload = function() {
     window.onresize = size;
  
     window.onmousemove = function(e) {
-       X = e.clientX;
-       Y = e.clientY;
+      var rect = canvas.getBoundingClientRect();
+       X = (e.clientX - rect.left)/(rect.right - rect.left) * canvas.width;
+       Y = (e.clientY - rect.top)/(rect.bottom - rect.top) * canvas.height;
     }
  
     window.onmousedown = function() {
