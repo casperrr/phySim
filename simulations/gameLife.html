@@ -29,18 +29,18 @@
     </header>
 
         <!-- Title -->
-
         <div class="header__for__cards">
             <h1>Game of Life:</h1>
             <h3>Here is an interactive simulation of John Conway's Game of Life. <br>Click on the canvas to draw cells and use the buttons to control the paramaters of the board.</h3>
         </div>
 
-
+    <!-- Main section - canvas and inputs -->
     <section class="main__container">
         <canvas height="600" width="1200"></canvas>
         
 
                 <div class="element__container">
+                    <!-- Sliders -->
                     <div class="element n">
                         <h2>Number of Cells</h2>
                         <p>Adjust slider to change the number of cells. (Counts the width.).</p>
@@ -49,7 +49,6 @@
                             <input type="range" min="10" max="200" value="80" class="slider" id="gridSizeColInp">
                             <h3>200</h3>
                         </div>
-                        <!-- <h3 class="slider__value" id="len__val">120</h3>        -->
                         <h3 class="slider__value">Cell Width = <span id="gridSizeColInp__val">160</span></h3>       
                     </div>
                     <div class="element speed">
@@ -60,11 +59,10 @@
                             <input type="range" min="1" max="200" value="10" class="slider" id="speed">
                             <h3>200</h3>
                         </div>
-                        <!-- <h3 class="slider__value" id="len__val">120</h3>        -->
                         <h3 class="slider__value">Delay(ms) = <span id="speed__val">10</span></h3>       
                     </div>
 
-                    
+                    <!-- Buttons -->
                     <div class="element__btn__container">
                         <div class="element__btn__single">
                             <button class="btn update" id="btnUpdate">Update</button>
@@ -81,9 +79,6 @@
                     </div>
                     
                 </div>
-
-            
-        
     </section>
     <script src="gameLife.js"></script>
 </body>

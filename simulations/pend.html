@@ -30,13 +30,12 @@
 
     
     <!-- Title -->
-
     <div class="header__for__cards">
         <h1>Pendulum Simulation:</h1>
         <h3>Here is a simulation of a simple pendulum.<br> Change the parameters to see how it affects the pendulum.<br>You can also click and drag the canvas to move the pendulum.</h3>
     </div>
 
-
+    <!-- Main section - canvas and inputs -->
     <section class="main__container">
         <canvas width="900" height="600"></canvas>
         
@@ -50,7 +49,6 @@
                             <input type="range" min="1" max="550" value="400" class="slider" id="length">
                             <h3>550</h3>
                         </div>
-                        <!-- <h3 class="slider__value" id="len__val">120</h3>        -->
                         <h3 class="slider__value">Length = <span id="len__val">400</span></h3>       
                     </div>
                     <div class="element pendElement mass">
@@ -101,9 +99,6 @@
                         </div>
                     </div>
                 </div>
-
-            
-        
     </section>
     <script src="pend.js"></script>
 </body>

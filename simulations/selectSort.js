@@ -1,7 +1,9 @@
+//Refrences to HTML elements.
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext("2d");
 const inputs = document.querySelector(".element__container");
 
+// Global Variables
 var abortController = true;
 var barNum = 10;
 var barNumInp = 80;
@@ -9,7 +11,8 @@ var leftGap = 10;
 var speed = 200;
 var dist = canvas.width/barNum;
 var hdist = canvas.height/barNum;
-var bars = [];
+var bars = []; //Main Array of bar objects
+//Color class
 var Color = function(r,g,b){
     this.r = r;
     this.g = g;
@@ -39,6 +42,7 @@ inputs.addEventListener("input", function(e){
 document.querySelector(".element__btn__container").addEventListener("click",function(e){
     if(e.target !== e.currentTarget){
         var btnClicked = e.target;
+        //Use button ID for case.
         switch(btnClicked.id){
             case "btnStart":
                 abortController = true;
@@ -63,6 +67,7 @@ document.querySelector(".element__btn__container").addEventListener("click",func
     e.stopPropagation();
 },false)
 
+//Bar class
 class Bar{
     constructor(height,color){
         this.height = height;
@@ -70,27 +75,27 @@ class Bar{
     }
 }
 
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-
+//Init function
 function init(){
     bars = [];
     dist = canvas.width/barNum;
     hdist = canvas.height/barNum;
+    //calculate gap between bars based on bar number
     leftGap = 5+((1-5)/(200-4))*(barNum-4);
+    //fill bars array with bar objects of increasing height and color
     for(var i = 0; i < barNum; i++){
         bars.push(new Bar(i+1,colorLerp(colorA,colorB,i/barNum)));
     }
 }
 
+//Background function
+//Clears Background
 function bg(){
     c.fillStyle = '#181818';
     c.fillRect(0,0,canvas.width,canvas.height);
 }
 
+//Will draw an array of bar objects to canvas
 function drawBars(arr){
     for (i in arr){
         var height = arr[i].height;
@@ -98,6 +103,7 @@ function drawBars(arr){
     }
 }
 
+//Draws a single bar
 function drawBar(x,y,width,height,color){
     c.fillStyle = `rgb(${color.r},${color.g},${color.b})`;
     c.beginPath();
@@ -105,6 +111,7 @@ function drawBar(x,y,width,height,color){
     c.fill();
 }
 
+//Shuffle an array
 function shuffle(arr){
     arr.sort(() => Math.random() - 0.5);
 }
@@ -117,30 +124,12 @@ function colorLerp(a,b,n){
     a.b + (b.b - a.b) * n);
 }
 
+//Will delay the script for the time passed in.
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function insertSort(arr){
-    for (let i = 1; i < arr.length; i++){
-        let key = arr[i];
-        let j = i - 1;
-        while(j >= 0 && arr[j].height > key.height){
-            if (abortController){
-                arr[j+1] = arr[j];
-                j--;
-            }else{
-                return;
-            }
-        }
-        arr[j+1] = key;
-        //draw here
-        bg();
-        drawBars(bars);
-        await sleep(1000-speed);
-    }
-}
-
+//Selection Sort function
 async function selectionSort(arr){
     for(let i = 0; i<arr.length; i++){
       //find min number in subarray 
@@ -164,7 +153,6 @@ async function selectionSort(arr){
         drawBars(bars);
         await sleep(1000-speed)
     }
-    //return arr;
 }
 
 

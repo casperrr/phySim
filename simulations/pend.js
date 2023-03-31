@@ -1,19 +1,16 @@
-
+//Refrences to HTML elements.
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 
-
+//Global variables
 const width = canvas.width;
 const height = canvas.height;
 var origin = new Vector(width/2,0);
 var vecLenMult = 150;
 var mouseDown = false;
 
-function setup(){
-    //c.translate(width/2,0);
-    
-}
-
+//----Variables for input elements----
+//Sliders
 const lenSlid = document.getElementById("length");
 const lenOut = document.getElementById("len__val");
 lenOut.innerHTML = lenSlid.value;
@@ -34,6 +31,7 @@ const dampSlid = document.getElementById("damp");
 const dampOut = document.getElementById("damp__val");
 dampOut.innerHTML = dampSlid.value/100;
 
+//Buttons
 lenSlid.oninput = function(){
     lenOut.innerHTML = this.value;
 }
@@ -50,7 +48,7 @@ dampSlid.oninput = function(){
     dampOut.innerHTML = this.value/100;
 }
 
-
+//Mouse position event
 captureMouse = function(element){
     var mouse = {x:0, y:0, event:null};
     canvas.addEventListener("mousemove", (event)=> {
@@ -60,37 +58,35 @@ captureMouse = function(element){
     },false);
 }
 
+//Mouse down event with mouse up and mouse move events
 canvas.addEventListener("mousedown", function(){
     mouseDown = true;
     canvas.addEventListener("mouseup", onMouseUp, false);
     canvas.addEventListener("mousemove", onMouseMove, false); 
 },false);
 
+//Mouse up function
 function onMouseUp(){
     mouseDown = false;
     canvas.removeEventListener("mouseup", onMouseUp, false);
     canvas.removeEventListener("mousemove", onMouseMove , false);
 }
 
+//Mouse event handler
 function onMouseMove(event){
-    // var mousePos = new Vector(event.pageX,event.pageY);
     let mousePosArr = getMousePos(event);
     var mousePos = new Vector(mousePosArr[0],mousePosArr[1]);
     var mouseAng = Math.atan2(origin.y - mousePos.y,origin.x - mousePos.x);
-    //console.log(mouseAng);
     pen.moveToMouse(-mouseAng - Math.PI/2);
 }
 
+//get mouse positon relative to canvas
 function getMousePos(e) {
     var rect = canvas.getBoundingClientRect();
     return [
         (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
         (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height]
-}
-
-
-
-    
+} 
 
 //animation loop
 function animate(){
@@ -102,7 +98,7 @@ function animate(){
     pen.draw();
 }
 
-//setup();
+//Pendulum class
 class Pendulum{
     constructor(len,mass,angle){
         this.bob = new Vector(0,0);
@@ -141,7 +137,7 @@ class Pendulum{
         c.fillStyle = '#ff0099';
         c.fill();
 
-        //draw vectors
+        //draw vectors (not in use)
         if (false){
             //gravity vector
             c.save();
@@ -162,20 +158,11 @@ class Pendulum{
             c.strokeStyle = '#0000ff';
             c.stroke();
             c.restore();
-            
-        // c.save();
-        // c.translate(this.bob.x,this.bob.y);
-        // c.beginPath();
-        // c.moveTo(0,0);
-        // c.lineTo(this.armVec.x,this.armVec.y);
-        // c.strokeStyle = '#0000ff';
-        // c.stroke();
-        // c.restore();
         }
     }
 
+    //calculate new pendulum position
     update(){
-
         this.armVec.copy(this.bob);
         this.armVec.sub(origin);
         // this.armVec.mult(-1);
@@ -190,12 +177,14 @@ class Pendulum{
         this.vel *= 1-this.damp;
     }
 
+    //move pendulum to the mouse position
     moveToMouse(ang){
         this.vel = 0;
         this.acc = 0;
         this.angle = ang;
     }
 
+    //update values with slider values
     getSlider(){
         this.len = lenSlid.value;
         this.mass = massSlid.value;
@@ -204,6 +193,7 @@ class Pendulum{
         this.damp = dampSlid.value/10000;
     }
 }
+//Pendulum object
 var pen = new Pendulum(350,massSlid,0.7);
 animate();
 
