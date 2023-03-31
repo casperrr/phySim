@@ -337,10 +337,34 @@ canvas {
     transition: all 0.5s ease;
 }
 
+/* amendments made to fix pends CSS. */
+.element__container__pend{
+    display: flex;
+    gap: 20px;
+    margin: 20px;
+    align-items: start;
+    justify-items: stretch;
+    width: 780PX;
+    flex-wrap: wrap;
+    transition: all 0.35 ease;
+    align-items: stretch;
+}
+
+.pendElement{
+    width: 100%;
+}
+
 @media (max-width:1800px){
     .element__container{
         /* width: 1200px; */
         transition: all 0.35 ease;
+    }
+    .element__container__pend{
+        width: 90%;
+        justify-content: center;
+    }
+    .pendElement{
+        width: 500px;
     }
     .main__container{
         flex-direction: column;
