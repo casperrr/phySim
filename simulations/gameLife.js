@@ -1,17 +1,18 @@
+//Refrences to HTML elements.
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext("2d");
 const inputs = document.querySelector(".element__container");
 
+//Global Variables
 var gridSizeColInp;
 var gridSizeCol = 80;
-// var gridSizeRow = 12;
 var gridSizeRow = gridSizeCol*2;
 var cellArr;
 var paused = false;
 var speed;
 var drawCellArr; //array that holds the pixels to be drawn too
 var mDown = false;
-var mPos = [0,0];
+var mPos = [0,0]; //Mouse position (x , y)
 
 // Event listner for inputs (Range slider only.)
 inputs.addEventListener("input", function(e){
@@ -28,9 +29,9 @@ inputs.addEventListener("input", function(e){
 document.querySelector(".element__btn__container").addEventListener("click",function(e){
     if(e.target !== e.currentTarget){
         var btnClicked = e.target;
+        //Use button ID for case.
         switch(btnClicked.id){
             case "btnUpdate":
-                //paused = true;
                 gridSizeCol = parseInt(gridSizeColInp);
                 gridSizeRow = gridSizeCol*2;
                 init();
@@ -54,22 +55,20 @@ document.querySelector(".element__btn__container").addEventListener("click",func
     e.stopPropagation();
 },false)
 
-
-//REMEBER TO USE STROKE AS PADDING.
-
-
-
-
+//Delay function using prommises
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+//Delay function using time
+//Causes whole program to stop until delay over
 function sleep2(milliseconds) {
     const start = Date.now();
     while (Date.now() - start < milliseconds);
 }
 
-
+//Main loop function
+//Will continously run
 async function loop(){
     if(!paused) nextGen();
     cellPaint(mPos[0],mPos[1]);
@@ -78,15 +77,14 @@ async function loop(){
     if(mDown){
         drawGrid(drawCellArr);
     }
-    //console.log("RUNNING");
-
     await sleep(speed);
     requestAnimationFrame(loop);
 }
 
 
 
-
+//Init function
+//Initialises cellArr and fills randomly
 function init(){
     cellArr = makeArray(gridSizeCol,gridSizeRow);
     for(let i = 0; i < gridSizeCol; i++){
@@ -96,11 +94,14 @@ function init(){
     }
 }
 
+//Background function
+//Clears Background
 function bg(){
     c.fillStyle = '#181818';
     c.fillRect(0,0,canvas.width,canvas.height);
 }
 
+//Draws grid of cells to canvas
 function drawGrid(arr){
     let w = canvas.width/gridSizeRow;
     let h = canvas.height/gridSizeCol;
@@ -111,8 +112,9 @@ function drawGrid(arr){
     }
 }
 
+//Draws a single cell
 function drawCell(x,y,w,h){
-    c.fillStyle = "rgb(255,10,100)";
+    c.fillStyle = "rgb(255,10,100)"; //Cell color
     c.strokeStyle = "#181818";
     c.lineWidth = 1;
     c.beginPath();
@@ -121,6 +123,7 @@ function drawCell(x,y,w,h){
     c.stroke();
 }
 
+//Returns a 2D array of given dimensions
 function makeArray(cols, rows){
     let array = new Array(cols);
     for(let i = 0; i < cols; i++){
@@ -143,6 +146,12 @@ function nSum(x,y){
     return sum;
 }
 
+/*
+Rules:
+1. Any live cell with two or three live neighbours survives.
+2. Any dead cell with three live neighbours becomes a live cell.
+3. All other live cells die in the next generation. Similarly, all other dead cells stay dead.
+*/
 //Creates the next generation of the board using the rules of the game.
 function nextGen(){
     let newArry = makeArray(gridSizeCol,gridSizeRow);
@@ -166,12 +175,15 @@ function nextGen(){
     cellArr = newArry;
 }
 
-//drawing section
+//---drawing section---
+
+//Function called on mouse down
 canvas.addEventListener("mousedown", function(e){
     drawCellArr = makeArray(gridSizeRow,gridSizeCol);
     mDown = true;
 },false);
 
+//Function called on mouse up
 canvas.addEventListener("mouseup",function(){
     for(let i = 0; i < gridSizeCol; i++){
         for(let j = 0; j < gridSizeRow; j++){
@@ -183,13 +195,14 @@ canvas.addEventListener("mouseup",function(){
     mDown = false;
 },false)
 
+//Function called on mouse move
 canvas.addEventListener("mousemove",function(e){
     //getMousePos(e)
     mPos = getMousePos(e);
 },false)
 
+//Adds cell to drawCellArr at given x,y pos
 function cellPaint(x,y){
-    //console.log(x,y)
     if(mDown){
         var cell = 
             [Math.floor(gridSizeRow/canvas.width*x),
@@ -198,17 +211,8 @@ function cellPaint(x,y){
         drawCellArr[cell[1]][cell[0]] = 1;
     }
 }
-//remeber that to get the cell with mouse you can do gridSizeCol/canvas.width*mousePos
 
-
-
-// function getMousePos(e) {
-//     var rect = canvas.getBoundingClientRect();
-//     cellPaint(
-//          (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
-//          (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height);
-// }
-
+//Calculate mouse pos relative to canvas.
 function getMousePos(e) {
     var rect = canvas.getBoundingClientRect();
     return [
@@ -216,18 +220,7 @@ function getMousePos(e) {
         (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height]
 }
 
-//REMINDER draw cells ontop of render and then when mouse up do the thing
-
-
-
-// function getMousePos(e) {
-//     var rect = canvas.getBoundingClientRect();
-//     return {
-//         x: (e.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
-//         y: (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
-//     };
-// }
-
+//Initial function calls. Run on startup.
 init();
 drawGrid(cellArr);
 loop();

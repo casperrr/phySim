@@ -1,19 +1,21 @@
 window.onload = function() {
 
+   //Links to elements in canvas
     var canvas = document.getElementById("homeCanvasBackground");
     var ctx = canvas.getContext("2d");
- 
+   
+    //pi constant
     var pi = Math.PI;
  
     var centerX, centerY;
-    var part_num = 2000;
+    var part_num = 2000;//number of particles
  
     var mousedown = false;
-    var X, Y;
-    /*===========================================================================*/
- 
-    /*===========================================================================*/
-    var P = [];
+    var X, Y; //x and y mouse pos decleration
+
+    var P = []; //array of points
+
+    //part class constructor
     var part = function(x, y, vx, vy, r, red, green, blue, alpha, col) {
        this.x = x;
        this.y = y;
@@ -27,14 +29,17 @@ window.onload = function() {
        this.col = col;
     };
  
+    //generate a random value between min and max
     function rand(min, max) {
        return Math.random() * (max - min) + min;
     }
  
+    //Calculate magnitude of vector
     function dist(dx, dy) {
        return Math.sqrt(dx * dx + dy * dy);
     }
  
+    //Update size of canvas to the size of window
     function size() {
        canvas.width = window.innerWidth;
        canvas.height = window.innerHeight;
@@ -46,6 +51,8 @@ window.onload = function() {
     X = centerX;
     Y = centerY;
  
+    //initialise function
+    //fills p array with particles
     function init() {
        var x, y, vx, vy, r, red, green, blue, alpha, col;
        for (var i = 0; i < part_num; i++) {
@@ -65,14 +72,14 @@ window.onload = function() {
        }
     }
  
+    //clear background
     function bg() {
        ctx.fillStyle = "#1818182a";
        ctx.fillRect(0, 0, canvas.width, canvas.height);
-       //ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
  
+    //edge detection
     function bounce(b) {
- 
        if (b.x < b.r) {
           b.x = b.r;
           b.vx *= -1;
@@ -92,13 +99,14 @@ window.onload = function() {
        }
     }
  
+    //calculate new velocity 
     function attract(p) {
- 
        var dx = (p.x - X),
           dy = (p.y - Y),
           dist = Math.sqrt(dx * dx + dy * dy),
           angle = Math.atan2(dy, dx);
  
+       //if within a certain distance attract or repel
        if (dist > 10 && dist < 300) {
           if (!mousedown) {
              p.vx -= (40 / (p.r * dist)) * Math.cos(angle);
@@ -111,6 +119,7 @@ window.onload = function() {
  
     }
  
+    //draw particles to canvas
     function draw() {
        var p;
        for (var i = 0; i < P.length; i++) {
@@ -128,27 +137,14 @@ window.onload = function() {
           ctx.fillStyle=p.col;
           ctx.beginPath();
           ctx.roundRect(p.x,p.y,p.r,p.r,20);
-          //   ctx.arc(p.x,p.y,p.r*10,0,Math.pi*2);
           ctx.fill();
-        //   ctx.fillRect(p.x,p.y,p.r,p.r);
-          //ctx.beginPath();
-          //ctx.fillStyle = p.col;
-          //ctx.arc(p.x, p.y, p.r, 0, 2 * pi);
-          //ctx.fill();
+
  
           
        }
-       //ctx.strokeStyle = (!mousedown) ? "rgba(255,255,255,1)" : "rgba(255,0,0,1)";
- 
-       // ctx.beginPath();
-       // ctx.moveTo(X, Y - 10);
-       // ctx.lineTo(X, Y + 10);
-       // ctx.moveTo(X - 10, Y);
-       // ctx.lineTo(X + 10, Y);
-       // ctx.stroke();
- 
     }
  
+    //Main loop function
     function loop() {
        bg();
        draw();
@@ -157,27 +153,32 @@ window.onload = function() {
     }
  
     window.onresize = size;
- 
+    //----Mouse event listners/handlers----
+    //mouse move event handler
     window.onmousemove = function(e) {
       var rect = canvas.getBoundingClientRect();
        X = (e.clientX - rect.left)/(rect.right - rect.left) * canvas.width;
        Y = (e.clientY - rect.top)/(rect.bottom - rect.top) * canvas.height;
     }
- 
+    
+    //mouse down event handler
     window.onmousedown = function() {
        mousedown = true;
     }
- 
+    
+    //mouse up event handler
     window.onmouseup = function() {
        mousedown = false;
     }
     
     var mouseover=false;
     
+    //mouse over event handler
     window.onmouseover = function() {
        mouseover = true;
     }
     
+    //mouse out event handler
     window.onmouseout = function(){
        mouseover=false;
     }

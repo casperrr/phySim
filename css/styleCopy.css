@@ -1,3 +1,5 @@
+/* Universal styles */
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -10,6 +12,7 @@ body{
     background-color: #181818;
 }
 
+/* header style */
 nav{
     width: 100%;
     height: 80px;
@@ -165,18 +168,6 @@ nav{
     transition: all 0.35 ease;
 }
 
-/* .main__container{
-    display: flex;
-    background-color: #181818;
-    justify-content: center;
-    flex-wrap: wrap;
-} */
-
-/* .main__container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(600px,1fr));
-} */
-
 canvas {
     margin: 40px;
     margin-top: 10;
@@ -188,7 +179,7 @@ canvas {
     
 }
 
-
+/* user input */
 
 .element__container{
     display: grid;
@@ -354,6 +345,7 @@ canvas {
     width: 100%;
 }
 
+/* if width < 1800 */
 @media (max-width:1800px){
     .element__container{
         /* width: 1200px; */
